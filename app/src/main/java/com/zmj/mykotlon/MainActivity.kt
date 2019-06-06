@@ -1,14 +1,17 @@
 package com.zmj.mykotlon
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.zmj.mykotlon.entry.Group
-import com.zmj.mykotlon.entry.Item
-import com.zmj.mykotlon.ui.adpter.ExpandListAdapter
+import android.widget.Toast
+import com.zmj.mykotlon.entry.*
+import com.zmj.mykotlon.net.IResponse
+import com.zmj.mykotlon.net.impl.ImplUtils
+import com.zmj.mykotlon.ui.activity.BaseActivity
 import com.zmj.mykotlon.ui.adpter.ExpandListAdapterJ
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private var gData : ArrayList<Group>? = null
     private var iData : ArrayList<ArrayList<Item>>? = null
@@ -64,6 +67,29 @@ class MainActivity : AppCompatActivity() {
         expandAdapter = ExpandListAdapterJ(this,gData!!,iData!!)
 
         el_expand.setAdapter(expandAdapter)
+
+        getNet.setOnClickListener {
+            getNetInfo()
+        }
+    }
+
+    fun getNetInfo(){
+        try {
+            GlobalScope.launch {
+                ImplUtils.getSms("18302451883","4256",object : IResponse<SmsResponse> {
+                    override fun onSuccess(t: SmsResponse) {
+                        Toast.makeText(this@MainActivity,"${t.toString()}", Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onFailed(throwable: Throwable) {
+                        Toast.makeText(this@MainActivity,"${throwable}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+
     }
 
 
