@@ -1,15 +1,20 @@
 package com.zmj.mykotlon
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.zmj.mykotlon.entry.*
 import com.zmj.mykotlon.net.IResponse
 import com.zmj.mykotlon.net.impl.ImplUtils
 import com.zmj.mykotlon.ui.activity.BaseActivity
+import com.zmj.mykotlon.ui.activity.SacnActivity
+import com.zmj.mykotlon.ui.activity.TestNetAct
 import com.zmj.mykotlon.ui.adpter.ExpandListAdapterJ
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.litepal.LitePal
+import org.litepal.crud.LitePalSupport
 
 class MainActivity : BaseActivity() {
 
@@ -23,6 +28,10 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         initData()
+
+        btn_nextPage.setOnClickListener { startActivity(Intent(this,SacnActivity::class.java)) }
+
+        getRidData()
     }
 
     fun initData(){
@@ -92,6 +101,37 @@ class MainActivity : BaseActivity() {
 
     }
 
+
+
+    fun getRidData(){
+        GlobalScope.launch {
+            ImplUtils.getBaseRid(object : IResponse<ArrayList<Rid>>{
+                override fun onSuccess(t: ArrayList<Rid>) {
+                    t.size
+                    //LitePal.delete(Rid::class.java,11)
+                    LitePal.saveAll(t)
+//                    for (index in 0..10){
+//                        var rid = t.get(index)
+//
+//                        val newRid = Rid(rid.type,rid.rid,rid.auditCode,rid.content,rid.auditReminds,rid.superRid,rid.isAuditPoint,rid.isMust,rid.values)
+//                        try {
+//                            newRid.saveThrows()
+//                        }catch (e : Exception){
+//                            e.printStackTrace()
+//                        }
+//                    }
+//                    for ( rid in t){
+//                        val newRid = Rid(rid.type,rid.rid,rid.auditCode,rid.content,rid.auditReminds,rid.superRid,rid.isAuditPoint,rid.isMust,rid.values)
+//                        newRid.save()
+//                    }
+                }
+
+                override fun onFailed(throwable: Throwable) {
+                    throwable.message
+                }
+            })
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
