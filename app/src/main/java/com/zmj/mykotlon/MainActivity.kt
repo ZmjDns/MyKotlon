@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.zmj.mykotlon.entry.*
+import com.zmj.mykotlon.initdata.WelcomeAct
 import com.zmj.mykotlon.net.IResponse
 import com.zmj.mykotlon.net.impl.ImplUtils
 import com.zmj.mykotlon.ui.activity.BaseActivity
@@ -25,13 +26,20 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
 
         initData()
 
         btn_nextPage.setOnClickListener { startActivity(Intent(this,SacnActivity::class.java)) }
+        btn_mvp.setOnClickListener {
+            startActivity(Intent(this,WelcomeAct::class.java))
+        }
 
-        getRidData()
+        //getRidData()
+    }
+
+    override fun setLayoutId(): Int {
+        return R.layout.activity_main
     }
 
     fun initData(){

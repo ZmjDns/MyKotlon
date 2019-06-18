@@ -40,11 +40,11 @@ class ExpandListAdapter(context: Context,gData : ArrayList<Group>,iData : ArrayL
     }
 
     override fun getGroupId(groupPosition: Int): Long {
-        return groupPosition as Long
+        return groupPosition.toLong()
     }
 
     override fun getChildId(groupPosition: Int, childPosition: Int): Long {
-        return childPosition as Long
+        return childPosition.toLong()
     }
 
     override fun hasStableIds(): Boolean {
