@@ -1,5 +1,7 @@
 package com.zmj.mykotlon.config
 
+import android.widget.Toast
+
 /**
  * Author : Zmj
  * Blog : https://blog.csdn.net/Zmj_Dns
@@ -12,4 +14,11 @@ object Constant {
     //public const val BASE_URL= "https://app.gsxt.gov.cn"//"http://192.168.1.254:8080"
     //const val BASE_URL= "http://192.168.1.254:8080/corvertSXWWData/"
     const val BASE_URL= "http://192.168.1.254:8080/security/"
+
+
+    /**
+     * Toast
+     */
+    @JvmField
+    var showToast : Toast? = null
 }
