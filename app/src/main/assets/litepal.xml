@@ -6,5 +6,6 @@
 
     <list>
         <mapping class="com.zmj.mykotlon.entry.Rid"/>
+        <mapping class="com.zmj.mykotlon.entry.LawItem"/>
     </list>
 </litepal>
