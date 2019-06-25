@@ -6,6 +6,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.zmj.mykotlon.R
 import com.zmj.mykotlon.ui.activity.BaseActivity
+import com.zmj.mykotlon.utils.PreferencesManager
+import com.zmj.mykotlon.utils.toast
 import kotlinx.android.synthetic.main.act_test_webview.*
 
 /**
@@ -28,6 +30,9 @@ class TestWebviewAct : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val indexHash : String by PreferencesManager("indexHashSign","aa")
+        toast(indexHash)
+
         setWebView()
     }
     //lambad表达式
@@ -47,7 +52,7 @@ class TestWebviewAct : BaseActivity() {
 
 
         //3.加载网页
-        webView.loadUrl("https://baidu.com")
+        webView.loadUrl("http://192.168.1.254:8080/tsdb/testH5.html")
     }
 
     private class MyWebvieClient : WebViewClient(){
@@ -69,6 +74,7 @@ class TestWebviewAct : BaseActivity() {
 
 
     override fun onDestroy() {
+        webView.clearCache(true)
         super.onDestroy()
     }
 }
