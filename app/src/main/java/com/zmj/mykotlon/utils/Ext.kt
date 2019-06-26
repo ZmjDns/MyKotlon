@@ -1,4 +1,4 @@
-package com.zmj.mykotlon
+package com.zmj.mykotlon.utils
 
 import android.content.Context
 import android.support.annotation.StringRes
