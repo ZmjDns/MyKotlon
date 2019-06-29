@@ -23,4 +23,11 @@ class JavaScriptMethod {
         //context.toast(json)
         context.let { it!!.toast(json) }
     }
+    @JavascriptInterface
+    fun getHotelData(){
+
+        println("酒店数据。。。。。。")
+
+
+    }
 }

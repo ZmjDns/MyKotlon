@@ -9,6 +9,7 @@ import com.zmj.mykotlon.ui.activity.BaseActivity
 import com.zmj.mykotlon.utils.PreferencesManager
 import com.zmj.mykotlon.utils.toast
 import kotlinx.android.synthetic.main.act_test_webview.*
+import org.json.JSONObject
 
 /**
  * Author : Zmj
@@ -30,7 +31,8 @@ class TestWebviewAct : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val indexHash : String by PreferencesManager("indexHashSign","aa")
+        val indexHash : String by PreferencesManager("indexHashSign","defaultHash")
+
         toast(indexHash)
 
         setWebView()
@@ -52,13 +54,18 @@ class TestWebviewAct : BaseActivity() {
 
 
         //3.加载网页
-        webView.loadUrl("http://192.168.1.254:8080/tsdb/testH5.html")
+        //webView.loadUrl("http://192.168.1.101:8080/tsdb/testH5.html")//10.0.2.2
+        webView.loadUrl("http://10.0.2.2:8080/tsdb/testH5.html")
     }
 
-    private class MyWebvieClient : WebViewClient(){
+    inner private class MyWebvieClient : WebViewClient(){
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
-            //调用H5方法
+            //kotlin 与H5 通信方式2：调用H5方法
+            //webView.loadUrl("javascript:方法名(参数)")
+            val json = JSONObject()
+            json.put("name","Tom")
+            webView.loadUrl("javascript:showMessage(${json.toString()})")
 
         }
     }
