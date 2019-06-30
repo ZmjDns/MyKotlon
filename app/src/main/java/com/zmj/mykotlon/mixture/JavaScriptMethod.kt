@@ -2,7 +2,12 @@ package com.zmj.mykotlon.mixture
 
 import android.content.Context
 import android.webkit.JavascriptInterface
+import android.webkit.WebView
 import com.zmj.mykotlon.utils.toast
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import java.net.URL
 
 /**
  * Author : Zmj
@@ -13,9 +18,11 @@ import com.zmj.mykotlon.utils.toast
  */
 class JavaScriptMethod {
     private var context : Context? = null
+    private var webView : WebView? = null
 
-    constructor(context: Context){
+    constructor(context: Context?,webView: WebView?){
         this.context = context
+        this.webView = webView
     }
 
     @JavascriptInterface  //Android4.2以后，如果不加注解 H5不能调用kotlin方法
@@ -26,7 +33,21 @@ class JavaScriptMethod {
     @JavascriptInterface
     fun getHotelData(){
 
-        println("酒店数据。。。。。。")
+        GlobalScope.launch {
+            async {
+                val url : URL = URL("http://10.0.2.2:8080/tsdb/testH5/hotel.json")
+
+                val result : String = url.readText()
+
+                println("酒店数据：$result")
+
+                context.let {
+//                    it.ruOnUiThread{
+////                        webView?.loadUrl("jsvascript:receiveHotelData($result)")
+////                    }
+                }
+            }
+        }
 
 
     }

@@ -50,12 +50,12 @@ class TestWebviewAct : BaseActivity() {
         //kotlin与H5的通信方式1：H5调用kotlin
         //设置h5与kotlin通信的桥梁类
         //webView.addJavascriptInterface(对象，字符串) ： 对象.方法名,  字符串就是参数1对象的别名
-        webView.addJavascriptInterface(JavaScriptMethod(this),"jsInterface")
+        webView.addJavascriptInterface(JavaScriptMethod(this,webView),"jsInterface")
 
 
         //3.加载网页
         //webView.loadUrl("http://192.168.1.101:8080/tsdb/testH5.html")//10.0.2.2
-        webView.loadUrl("http://10.0.2.2:8080/tsdb/testH5.html")
+        webView.loadUrl("http://10.0.2.2:8080/tsdb/testH5/testH5.html")
     }
 
     inner private class MyWebvieClient : WebViewClient(){
