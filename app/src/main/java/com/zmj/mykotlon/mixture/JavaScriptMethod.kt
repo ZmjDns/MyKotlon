@@ -42,9 +42,9 @@ class JavaScriptMethod {
                 println("酒店数据：$result")
 
                 context.let {
-//                    it.ruOnUiThread{
-////                        webView?.loadUrl("jsvascript:receiveHotelData($result)")
-////                    }
+//                    it.runOnUiThread{
+//                        webView?.loadUrl("jsvascript:receiveHotelData($result)")
+//                    }
                 }
             }
         }
