@@ -5,12 +5,9 @@ import android.view.View
 import com.zmj.mykotlon.R
 import com.zmj.mykotlon.ui.activity.BaseActivity
 import kotlinx.android.synthetic.main.act_coroutine_pritace.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.actor
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * Author : Zmj
@@ -85,7 +82,7 @@ class CoroutonePraticeAct : BaseActivity() {
             tv_countDown.text = "Done!"
         }
     }
-    //View扩展函数的优化
+    //View扩展函数的优化  用actor控制当前运行协程
     fun View.onClickNew(action: suspend (View) -> Unit){
         //启动一个actor
                                         //capacity = Channel.CONFLATED/*设置处理最近的事件，执行本次事件及本次事件中点击的下一个事件（如果点击多次只执行到下一次）*/
@@ -100,7 +97,12 @@ class CoroutonePraticeAct : BaseActivity() {
 
     //在UI主线程中处理最后一次点击，斐波那契数列计算
     //斐波那契数列
-    fun fib(x:Int) : Int = if (x <= 1) x else fib(x -1) + fib(x - 20)
+    fun fibBlocking(x:Int) : Int = if (x <= 1) x else fibBlocking(x -1) + fibBlocking(x - 20)
+
+    //优化阻塞
+    suspend fun fib(x : Int) = withContext(Dispatchers.Default){
+        fibBlocking(x)
+    }
 
     fun setFib(){
         var result = "none"  //最后一个结果
@@ -120,6 +122,8 @@ class CoroutonePraticeAct : BaseActivity() {
             x++
         }
     }
+
+
 
 
 

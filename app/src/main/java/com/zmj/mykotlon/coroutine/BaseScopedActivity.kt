@@ -10,7 +10,7 @@ import kotlinx.coroutines.cancel
  * Blog : https://blog.csdn.net/Zmj_Dns
  * DitHub : https://github.com/ZmjDns
  * Time : 2019/7/3
- * Description :
+ * Description :Activity实现协程基础类
  */
 abstract class BaseScopedActivity : AppCompatActivity(),CoroutineScope by MainScope() {
 
