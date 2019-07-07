@@ -3,6 +3,8 @@ package com.zmj.mykotlon.utils
 import android.content.Context
 import android.support.annotation.StringRes
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import com.zmj.mykotlon.config.Constant
 
@@ -45,5 +47,8 @@ inline fun tryCatch(catchBlock : (Throwable) -> Unit = {}, tryBlock : () -> Unit
         catchBlock(t)
     }
 }
-
+//View的扩展函数
+//fun View.onClick(){
+//
+//}
 
