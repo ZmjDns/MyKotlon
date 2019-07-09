@@ -1,8 +1,7 @@
 package com.zmj.mykotlon.net
 
-import com.zmj.mykotlon.entry.LoginRep
-import com.zmj.mykotlon.entry.SmsResponse
-import com.zmj.mykotlon.entry.Template
+import com.zmj.mykotlon.entry.*
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -20,4 +19,12 @@ interface ApiService {
     @FormUrlEncoded
     fun getSms(@Field("phone") phone : String,@Field("checkCode") code : String) : Call<SmsResponse>
 
+    @POST("?action=ridData")
+    fun getRid() : Call<ArrayList<Rid>>
+
+    @POST("?action=lawItem")
+    fun getLawItems() : Call<ArrayList<LawItem>>
+
+    @GET("?action=ridData")
+    fun getMethodRid() : Deferred<ArrayList<Rid>>
 }
