@@ -2,6 +2,7 @@ package com.zmj.mykotlon.net
 
 import com.zmj.mykotlon.entry.*
 import kotlinx.coroutines.Deferred
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -27,4 +28,16 @@ interface ApiService {
 
     @GET("?action=ridData")
     fun getMethodRid() : Deferred<ArrayList<Rid>>
+    /**
+     * 封装上传多个字段
+     */
+    @POST("?action=XXXX")
+    @FormUrlEncoded
+    suspend fun uploadInfo(@FieldMap data: MutableMap<String,String>)
+    /**
+     * 上传文字+图片
+     */
+    @POST("?actiion=XXXX")
+    @FormUrlEncoded
+    suspend fun uploadFile(@PartMap fileData: MutableMap<String,RequestBody>)
 }
