@@ -11,7 +11,7 @@
     <ExpandableListView
             android:id="@+id/el_expand"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="100dp"/>
 
     <Button
             android:id="@+id/getNet"
@@ -34,5 +34,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="webView"/>
+    <Button
+            android:id="@+id/btn_coRoutine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="coroutine"/>
+
+    <android.support.design.widget.TabLayout
+            android:id="@+id/tl_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            app:tabMode="scrollable"/>
+
 
 </LinearLayout>
