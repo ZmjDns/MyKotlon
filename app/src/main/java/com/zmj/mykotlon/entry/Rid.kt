@@ -1,5 +1,6 @@
 package com.zmj.mykotlon.entry
 
+import com.google.gson.Gson
 import org.litepal.LitePal
 import org.litepal.crud.LitePalSupport
 
@@ -21,7 +22,9 @@ class Rid(var type:String,
           var values : String?) : LitePalSupport() {
 
     override fun toString(): String {
-        return "(type:$type,rid:$rid,auditCode:$auditCode,content:$content,auditReminds:$auditReminds," +
-                "superRid:$superRid,isAuditPoint:$isAuditPoint,isMust:$isMust,values:$values)"
+//        return "(type:$type,rid:$rid,auditCode:$auditCode,content:$content,auditReminds:$auditReminds," +
+//                "superRid:$superRid,isAuditPoint:$isAuditPoint,isMust:$isMust,values:$values)"
+
+        return Gson().toJson(this)
     }
 }
