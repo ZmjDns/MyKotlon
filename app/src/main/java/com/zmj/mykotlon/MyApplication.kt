@@ -1,5 +1,6 @@
 package com.zmj.mykotlon
 
+import android.app.Application
 import android.database.sqlite.SQLiteDatabase
 import com.zmj.mykotlon.utils.PreferencesManager
 import com.zmj.mykotlon.utils.loge
@@ -15,7 +16,7 @@ import org.litepal.tablemanager.callback.DatabaseListener
  * Time : 2019/6/14
  * Description :
  */
-class MyApplication: LitePalApplication() {
+class MyApplication: Application()/*CasePackageApp()*/ {
     var sqlDB : SQLiteDatabase? = null
     override fun onCreate() {
         super.onCreate()
@@ -34,7 +35,7 @@ class MyApplication: LitePalApplication() {
             }
         })
 
-        sqlDB = Connector.getDatabase()
+        //sqlDB = Connector.getDatabase()
     }
 
 }
