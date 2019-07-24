@@ -2,15 +2,20 @@ package com.zmj.mykotlon
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.widget.Toast
+import com.zmj.mykotlon.coroutine.CoroutonePraticeAct
 import com.zmj.mykotlon.entry.*
 import com.zmj.mykotlon.initdata.WelcomeAct
+import com.zmj.mykotlon.mixture.TestWebviewAct
 import com.zmj.mykotlon.net.IResponse
 import com.zmj.mykotlon.net.impl.ImplUtils
 import com.zmj.mykotlon.ui.activity.BaseActivity
 import com.zmj.mykotlon.ui.activity.SacnActivity
 import com.zmj.mykotlon.ui.activity.TestNetAct
 import com.zmj.mykotlon.ui.adpter.ExpandListAdapterJ
+import com.zmj.mykotlon.utils.PreferencesManager
+import com.zmj.mykotlon.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -24,9 +29,16 @@ class MainActivity : BaseActivity() {
     private var lData : ArrayList<Item>? = null
     private var expandAdapter : ExpandListAdapterJ? = null
 
+
+    private var indexHashSign : String by PreferencesManager("indexHashSign","defaultHash")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
+
+        indexHashSign = "testInfo"
+
+        toast(indexHashSign)
 
         initData()
 
@@ -34,8 +46,19 @@ class MainActivity : BaseActivity() {
         btn_mvp.setOnClickListener {
             startActivity(Intent(this,WelcomeAct::class.java))
         }
+        btn_mixture.setOnClickListener {
+            startActivity(Intent(this,TestWebviewAct::class.java))
+        }
+        btn_coRoutine.setOnClickListener {
+            startActivity(Intent(this,CoroutonePraticeAct::class.java))
+        }
 
         //getRidData()
+        val rid = Rid("A","1.1.2","ACPI110250","testContent","hhahaahha","1.1","1","1","")
+        toast(rid.toString())
+        println("ridJson ： $rid")
+
+        initMyTabLayout()
     }
 
     override fun setLayoutId(): Int {
@@ -139,6 +162,35 @@ class MainActivity : BaseActivity() {
                 }
             })
         }
+    }
+
+    fun initMyTabLayout(){
+        tl_tab.addTab(tl_tab.newTab().setText("审计要素1：职责程序"),true)
+        tl_tab.addTab(tl_tab.newTab().setText("审计要素2：职责程序"),false)
+        tl_tab.addTab(tl_tab.newTab().setText("审计要素3：职责程序"),false)
+        tl_tab.addTab(tl_tab.newTab().setText("审计要素4：职责程序"),false)
+        tl_tab.addTab(tl_tab.newTab().setText("审计要素5：职责程序"),false)
+        tl_tab.addTab(tl_tab.newTab().setText("审计要素6：职责程序"),false)
+
+        tl_tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+                //再次选中
+                Toast.makeText(this@MainActivity,"我被再次选中了${p0!!.text}",Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+                //未选中
+                Toast.makeText(this@MainActivity,"我没被选中${p0!!.text}",Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+                //选中
+                Toast.makeText(this@MainActivity,"我被选中了${p0!!.text}",Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+
     }
 
     override fun onDestroy() {
